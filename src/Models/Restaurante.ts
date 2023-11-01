@@ -5,16 +5,18 @@ class RestauranteClass {
   infos: string[]
   descricao: string
   id: number
-
+  to: string
   constructor(
     nome: string,
     avaliacao: number,
     infos: string[],
     imagem: string,
     descricao: string,
-    id: number
+    id: number,
+    to: string
   ) {
     this.imagem = imagem
+    this.to = to
     this.nome = nome
     this.avaliacao = avaliacao
     this.infos = infos

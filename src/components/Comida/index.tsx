@@ -11,7 +11,7 @@ const Comida = ({ nome, imagem, descricao }: Props) => (
     <Imagem src={imagem} alt="" />
     <Nome>{nome}</Nome>
     <Desricao>{descricao}</Desricao>
-    <Botao>Adddd</Botao>
+    <Botao>Adicionar ao carrinho</Botao>
   </Card>
 )
 

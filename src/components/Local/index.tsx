@@ -1,34 +1,36 @@
 import { Tag, Card, Content, Infos, Tags } from './styles'
-import star from '../../assets/images/estrela.svg'
 import { Link } from 'react-router-dom'
 
+import star from '../../assets/images/estrela.svg'
+
 type Props = {
-  nome: string
+  titulo: string
   avaliacao: number
-  infos: string[]
+  destacado: boolean
+  tipo: string
   descricao: string
-  to: string
-  imagem: string
+  id: number
+  capa: string
 }
 
 const Restaurante = ({
-  nome,
-  to,
-  imagem,
+  titulo,
+  id,
+  capa,
   avaliacao,
-  infos,
+  tipo,
+  destacado,
   descricao
 }: Props) => (
   <Card>
-    <img src={imagem} alt="" />
+    <img src={capa} alt="" />
     <Tags>
-      {infos.map((info) => (
-        <Tag key={info}>{info}</Tag>
-      ))}
+      {destacado && <Tag>Destaque da semana</Tag>}
+      <Tag>{tipo}</Tag>
     </Tags>
     <Content>
       <Infos className="sobre">
-        <h3>{nome}</h3>
+        <h3>{titulo}</h3>
         <div className="center">
           <h3>{avaliacao}</h3>
           <img src={star} alt="" />
@@ -37,7 +39,7 @@ const Restaurante = ({
 
       <p>{descricao}</p>
 
-      <Link to={to}>
+      <Link to={`/restaurantes/${id}`}>
         <Tag as="a" href="">
           Saiba mais
         </Tag>

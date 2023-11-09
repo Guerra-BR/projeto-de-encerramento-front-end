@@ -2,10 +2,6 @@ import styled from 'styled-components'
 import { cores } from '../../style'
 import Vetor from '../../assets/images/Vector.png'
 
-type Props = {
-  bannerImg: string
-}
-
 export const Cabecalho = styled.header`
   background-color: ${cores.rosa};
   background-image: url(${Vetor});
@@ -39,8 +35,7 @@ export const Slogan = styled.h1`
   max-width: 540px;
 `
 
-export const Banner = styled.div<Props>`
-  background-image: url(${(props) => props.bannerImg});
+export const Banner = styled.div`
   height: 280px;
   background-repeat: no-repeat;
   background-size: cover;

@@ -1,3 +1,6 @@
+import Logo from '../../assets/images/logo.png'
+import { Link } from 'react-router-dom'
+
 import {
   Banner,
   Blur,
@@ -7,15 +10,14 @@ import {
   ResCabecalho,
   Slogan
 } from './styles'
-import Logo from '../../assets/images/logo.png'
-import banner from '../../assets/images/image22.png'
-import { Link } from 'react-router-dom'
+import { RestauranteClass } from '../../Pages/Home'
 
 type Props = {
   home: 'home' | 'perfil'
+  restaurante?: RestauranteClass
 }
 
-const Header = ({ home }: Props) => {
+const Header = ({ home, restaurante }: Props) => {
   if (home === 'home') {
     return (
       <Cabecalho>
@@ -24,6 +26,8 @@ const Header = ({ home }: Props) => {
       </Cabecalho>
     )
   } else {
+    if (!restaurante) return <h3>Carregando...</h3>
+
     return (
       <ResCabecalho>
         <Container className="container">
@@ -33,11 +37,11 @@ const Header = ({ home }: Props) => {
           </Link>
           <p>0 produtos no carrinho</p>
         </Container>
-        <Banner bannerImg={banner}>
+        <Banner style={{ backgroundImage: `url(${restaurante.capa})` }}>
           <Blur className="blur">
             <Idem className="container">
-              <p>Tipo</p>
-              <h1>La Dolce Vita Trattoria</h1>
+              <p>{restaurante.tipo}</p>
+              <h1>{restaurante.titulo}</h1>
             </Idem>
           </Blur>
         </Banner>

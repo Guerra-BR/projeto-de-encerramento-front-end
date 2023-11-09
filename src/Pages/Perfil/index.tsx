@@ -1,58 +1,25 @@
+import { useParams } from 'react-router-dom'
 import Header from '../../components/Header'
 import ListaComidas from '../../components/ListaComidas'
-import ComidaClass from '../../Models/Comida'
-import imagem from '../../assets/images/pizza.png'
-
-const comidas: ComidaClass[] = [
-  {
-    nome: 'Pizza',
-    descricao:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-    id: 1,
-    imagem: imagem
-  },
-  {
-    nome: 'Pizza',
-    descricao:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-    id: 2,
-    imagem: imagem
-  },
-  {
-    nome: 'Pizza',
-    descricao:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-    id: 3,
-    imagem: imagem
-  },
-  {
-    nome: 'Pizza',
-    descricao:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-    id: 4,
-    imagem: imagem
-  },
-  {
-    nome: 'Pizza',
-    descricao:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-    id: 5,
-    imagem: imagem
-  },
-  {
-    nome: 'Pizza',
-    descricao:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-    id: 6,
-    imagem: imagem
-  }
-]
+import { useEffect, useState } from 'react'
+import { RestauranteClass } from '../Home'
 
 function Perfil() {
+  const { id } = useParams()
+  const [restaurante, setRestaurante] = useState<RestauranteClass>()
+
+  useEffect(() => {
+    fetch(`https://fake-api-tau.vercel.app/api/efood/restaurantes/${id}`)
+      .then((res) => res.json())
+      .then((res) => setRestaurante(res))
+  }, [id])
+
+  if (!restaurante) return <h3>Carregando...</h3>
+
   return (
     <>
-      <Header home="perfil" />
-      <ListaComidas comidas={comidas} />
+      <Header restaurante={restaurante} home="perfil" />
+      <ListaComidas cardapio={restaurante.cardapio} />
     </>
   )
 }

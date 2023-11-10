@@ -14,6 +14,7 @@ const ListaComidas = ({ cardapio }: Props) => {
           {cardapio.map((r) => (
             <li key={r.id}>
               <Comida
+                preco={r.preco}
                 foto={r.foto}
                 descricao={r.descricao}
                 nome={r.nome}

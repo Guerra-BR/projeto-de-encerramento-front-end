@@ -26,6 +26,10 @@ export const Container = styled.div`
   padding-top: 40px;
   padding-bottom: 64px;
   align-items: center;
+
+  p {
+    cursor: pointer;
+  }
 `
 
 export const Slogan = styled.h1`
@@ -66,6 +70,7 @@ export const Idem = styled.div`
   }
 
   p {
+    cursor: pointer;
     color: ${cores.branco};
     font-size: 32px;
   }

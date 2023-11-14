@@ -1,5 +1,6 @@
 import Logo from '../../assets/images/logo.png'
 import { Link } from 'react-router-dom'
+import { open } from '../../store/reducers/Cart'
 
 import {
   Banner,
@@ -11,6 +12,8 @@ import {
   Slogan
 } from './styles'
 import { RestauranteClass } from '../../Pages/Home'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootReducer } from '../../store'
 
 type Props = {
   home: 'home' | 'perfil'
@@ -18,6 +21,9 @@ type Props = {
 }
 
 const Header = ({ home, restaurante }: Props) => {
+  const { itens } = useSelector((state: RootReducer) => state.cart)
+  const dispatch = useDispatch()
+
   if (home === 'home') {
     return (
       <Cabecalho>
@@ -35,7 +41,9 @@ const Header = ({ home, restaurante }: Props) => {
           <Link to={'/'}>
             <img src={Logo} alt="EFood" />
           </Link>
-          <p>0 produtos no carrinho</p>
+          <p onClick={() => dispatch(open())}>
+            {itens.length} produto(s) no carrinho
+          </p>
         </Container>
         <Banner style={{ backgroundImage: `url(${restaurante.capa})` }}>
           <Blur className="blur">

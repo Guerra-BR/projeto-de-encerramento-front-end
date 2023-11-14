@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { add, open } from '../../store/reducers/Cart'
 import {
   Botao,
   Card,
@@ -8,14 +9,11 @@ import {
   ModalContent,
   Nome
 } from './styles'
+import { useDispatch } from 'react-redux'
+import { ComidaClass } from '../../Pages/Home'
 
 type Props = {
-  nome: string
-  foto: string
-  id: number
-  descricao: string
-  porcao: string
-  preco: number
+  comida: ComidaClass
 }
 
 type Modal = {
@@ -26,15 +24,16 @@ type Modal = {
   porcao: string
 }
 
-const Comida = ({ nome, foto, descricao, porcao, preco }: Props) => {
-  const [modalAberta, setModalAberta] = useState(false)
+export const formataPreco = (preco = 0) => {
+  return new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL'
+  }).format(preco)
+}
 
-  const formataPreco = (preco = 0) => {
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL'
-    }).format(preco)
-  }
+const Comida = ({ comida }: Props) => {
+  const [modalAberta, setModalAberta] = useState(false)
+  const dispatch = useDispatch()
 
   const getDesricao = (descricao: string) => {
     if (descricao.length > 170) {
@@ -42,12 +41,17 @@ const Comida = ({ nome, foto, descricao, porcao, preco }: Props) => {
     }
   }
 
+  const addToCart = () => {
+    dispatch(add(comida))
+    dispatch(open())
+  }
+
   return (
     <>
       <Card>
-        <Imagem src={foto} alt="" />
-        <Nome>{nome}</Nome>
-        <Desricao>{getDesricao(descricao)}</Desricao>
+        <Imagem src={comida.foto} alt="" />
+        <Nome>{comida.nome}</Nome>
+        <Desricao>{getDesricao(comida.descricao)}</Desricao>
         <Botao onClick={() => setModalAberta(true)}>
           Adicionar ao carrinho
         </Botao>
@@ -55,15 +59,17 @@ const Comida = ({ nome, foto, descricao, porcao, preco }: Props) => {
 
       <Modal className={modalAberta ? 'visivel' : ''}>
         <ModalContent>
-          <img src={foto} alt="" />
+          <img src={comida.foto} alt="" />
           <div>
-            <h4>{nome}</h4>
+            <h4>{comida.nome}</h4>
             <p>
-              {descricao} <br />
+              {comida.descricao} <br />
               <br />
-              Serve de {porcao}
+              Serve de {comida.porcao}
             </p>
-            <Botao>Adicionar ao carrinho - {formataPreco(preco)}</Botao>
+            <Botao onClick={addToCart}>
+              Adicionar ao carrinho - {formataPreco(comida.preco)}
+            </Botao>
           </div>
         </ModalContent>
         <div

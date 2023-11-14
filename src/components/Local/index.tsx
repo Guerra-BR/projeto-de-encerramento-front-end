@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 import star from '../../assets/images/estrela.svg'
 
-type Props = {
+export type Local = {
   titulo: string
   avaliacao: number
   destacado: boolean
@@ -21,7 +21,7 @@ const Restaurante = ({
   tipo,
   destacado,
   descricao
-}: Props) => (
+}: Local) => (
   <Card>
     <img src={capa} alt="" />
     <Tags>

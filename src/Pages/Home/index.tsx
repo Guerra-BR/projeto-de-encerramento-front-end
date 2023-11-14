@@ -1,6 +1,6 @@
 import RestaurantesList from '../../components/ListagemRestaurantes'
 import Header from '../../components/Header'
-import { useEffect, useState } from 'react'
+import { useGetRestaurantesListQuery } from '../../services/api'
 
 export type ComidaClass = {
   foto: string
@@ -23,13 +23,11 @@ export type RestauranteClass = {
 }
 
 function Home() {
-  const [restaurantes, setRestaurantes] = useState<RestauranteClass[]>([])
+  const { data: restaurantes } = useGetRestaurantesListQuery()
 
-  useEffect(() => {
-    fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes')
-      .then((res) => res.json())
-      .then((res) => setRestaurantes(res))
-  }, [])
+  if (!restaurantes) {
+    return <h4>Carregando...</h4>
+  }
 
   return (
     <>

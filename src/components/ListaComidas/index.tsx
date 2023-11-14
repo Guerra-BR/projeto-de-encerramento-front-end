@@ -13,14 +13,7 @@ const ListaComidas = ({ cardapio }: Props) => {
         <Listagem>
           {cardapio.map((r) => (
             <li key={r.id}>
-              <Comida
-                preco={r.preco}
-                foto={r.foto}
-                descricao={r.descricao}
-                nome={r.nome}
-                id={r.id}
-                porcao={r.porcao}
-              />
+              <Comida comida={r} />
             </li>
           ))}
         </Listagem>

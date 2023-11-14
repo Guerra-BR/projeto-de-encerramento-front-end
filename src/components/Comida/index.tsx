@@ -36,12 +36,18 @@ const Comida = ({ nome, foto, descricao, porcao, preco }: Props) => {
     }).format(preco)
   }
 
+  const getDesricao = (descricao: string) => {
+    if (descricao.length > 170) {
+      return descricao.slice(0, 170) + '...'
+    }
+  }
+
   return (
     <>
       <Card>
         <Imagem src={foto} alt="" />
         <Nome>{nome}</Nome>
-        <Desricao>{descricao}</Desricao>
+        <Desricao>{getDesricao(descricao)}</Desricao>
         <Botao onClick={() => setModalAberta(true)}>
           Adicionar ao carrinho
         </Botao>

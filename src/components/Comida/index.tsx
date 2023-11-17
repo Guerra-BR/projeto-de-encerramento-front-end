@@ -9,6 +9,8 @@ import {
   ModalContent,
   Nome
 } from './styles'
+
+import close from '../../assets/images/close.png'
 import { useDispatch } from 'react-redux'
 import { ComidaClass } from '../../Pages/Home'
 
@@ -71,6 +73,14 @@ const Comida = ({ comida }: Props) => {
               Adicionar ao carrinho - {formataPreco(comida.preco)}
             </Botao>
           </div>
+          <img
+            className="close-icon"
+            src={close}
+            onClick={() => {
+              setModalAberta(false)
+            }}
+            alt=""
+          />
         </ModalContent>
         <div
           onClick={() => {

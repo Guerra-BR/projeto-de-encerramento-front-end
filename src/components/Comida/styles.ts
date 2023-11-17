@@ -95,4 +95,14 @@ export const ModalContent = styled.div`
     width: max-content;
     padding: 4px 6px;
   }
+
+  .close-icon {
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    margin: 0;
+    cursor: pointer;
+  }
 `

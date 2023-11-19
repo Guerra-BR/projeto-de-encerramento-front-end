@@ -131,9 +131,9 @@ const Cart = () => {
     <CartContainer className={isOpen ? 'is-open' : ''}>
       <Overlay
         onClick={() => {
-          dispatch(close())
-          setIsCheckouting(false)
           setIsPaying(false)
+          setIsCheckouting(false)
+          dispatch(close())
         }}
       />
       <SideBar>
@@ -168,7 +168,7 @@ const Cart = () => {
                     </Botao>
                   </>
                 ) : (
-                  <p>
+                  <p className="center">
                     Adicione um item no carrinho para prosseguir com seu pedido
                   </p>
                 )}
@@ -410,8 +410,9 @@ const Cart = () => {
             <Botao
               className="margin-top"
               onClick={() => {
-                setIsCheckouting(false)
                 setIsPaying(false)
+                setIsCheckouting(false)
+                dispatch(close())
               }}
             >
               Concluir

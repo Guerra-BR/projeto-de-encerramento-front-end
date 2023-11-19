@@ -49,6 +49,9 @@ export const SideBar = styled.aside`
 
   > p {
     color: ${cores.rosaClaro};
+  }
+
+  .center {
     text-align: center;
   }
 `

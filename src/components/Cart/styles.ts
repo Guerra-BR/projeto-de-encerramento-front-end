@@ -1,6 +1,10 @@
 import { styled } from 'styled-components'
 import { cores } from '../../style'
 
+type Props = {
+  maxWidth?: string
+}
+
 export const Overlay = styled.div`
   position: absolute;
   top: 0;
@@ -33,6 +37,20 @@ export const SideBar = styled.aside`
   z-index: 1;
   width: 360px;
   padding: 32px 16px 0 16px;
+
+  .margin-top {
+    margin-top: 24px;
+  }
+
+  h3 {
+    color: ${cores.rosaClaro};
+    margin-bottom: 16px;
+  }
+
+  > p {
+    color: ${cores.rosaClaro};
+    text-align: center;
+  }
 `
 
 export const CartItem = styled.li`
@@ -74,5 +92,58 @@ export const Qtty = styled.p`
   span {
     font-weight: bold;
     color: ${cores.rosaClaro};
+  }
+`
+
+export const Botao = styled.button`
+  width: 100%;
+  padding: 4px;
+  border: none;
+  background-color: ${cores.rosaClaro};
+  cursor: pointer;
+  margin-bottom: 8px;
+  height: 24px;
+`
+
+export const Conteudo = styled.form`
+  display: block;
+  margin-bottom: 24px;
+
+  label,
+  input {
+    color: ${cores.rosaClaro};
+    display: block;
+  }
+`
+
+export const Row = styled.div`
+  width: 100%;
+  display: flex;
+  flex: auto;
+  column-gap: 34px;
+  margin-top: 8px;
+`
+
+export const InputGroup = styled.div<Props>`
+  width: ${(props) => (props.maxWidth ? props.maxWidth : '100%')};
+
+  label {
+    margin-bottom: 8px;
+  }
+
+  input {
+    background-color: ${cores.rosaClaro};
+    border: 2px solid transparent;
+    width: 100%;
+    padding: 8px;
+    color: #4b4b4b;
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: bold;
+
+    &.error {
+      color: red;
+      border: 2px solid red;
+    }
   }
 `

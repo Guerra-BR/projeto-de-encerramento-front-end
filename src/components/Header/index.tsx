@@ -27,7 +27,9 @@ const Header = ({ home, restaurante }: Props) => {
   if (home === 'home') {
     return (
       <Cabecalho>
-        <img src={Logo} alt="EFood" />
+        <Link to={'/'}>
+          <img src={Logo} alt="EFood" />
+        </Link>
         <Slogan>Viva experiências gastronômicas no conforto da sua casa</Slogan>
       </Cabecalho>
     )

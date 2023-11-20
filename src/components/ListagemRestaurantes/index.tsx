@@ -1,4 +1,3 @@
-import { RestauranteClass } from '../../Pages/Home'
 import Restaurante from '../Local'
 import { Container, Listagem } from './styles'
 

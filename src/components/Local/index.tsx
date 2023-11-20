@@ -1,9 +1,10 @@
-import { Tag, Card, Content, Infos, Tags } from './styles'
 import { Link } from 'react-router-dom'
+
+import * as S from './styles'
 
 import star from '../../assets/images/estrela.svg'
 
-export type Local = {
+type Props = {
   titulo: string
   avaliacao: number
   destacado: boolean
@@ -21,31 +22,31 @@ const Restaurante = ({
   tipo,
   destacado,
   descricao
-}: Local) => (
-  <Card>
+}: Props) => (
+  <S.Card>
     <img src={capa} alt="" />
-    <Tags>
-      {destacado && <Tag>Destaque da semana</Tag>}
-      <Tag>{tipo}</Tag>
-    </Tags>
-    <Content>
-      <Infos className="sobre">
+    <S.Tags>
+      {destacado && <S.Tag>Destaque da semana</S.Tag>}
+      <S.Tag>{tipo}</S.Tag>
+    </S.Tags>
+    <S.Content>
+      <S.Infos className="sobre">
         <h3>{titulo}</h3>
         <div className="center">
           <h3>{avaliacao}</h3>
           <img src={star} alt="" />
         </div>
-      </Infos>
+      </S.Infos>
 
       <p>{descricao}</p>
 
       <Link to={`/restaurantes/${id}`}>
-        <Tag as="a" href="">
+        <S.Tag as="a" href="">
           Saiba mais
-        </Tag>
+        </S.Tag>
       </Link>
-    </Content>
-  </Card>
+    </S.Content>
+  </S.Card>
 )
 
 export default Restaurante

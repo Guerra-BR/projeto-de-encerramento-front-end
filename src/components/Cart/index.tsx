@@ -1,25 +1,16 @@
-import { close, remove, clear } from '../../store/reducers/Cart'
-import trash from '../../assets/images/lixeira.png'
-import * as Yup from 'yup'
-import { useFormik } from 'formik'
-
-import { formataPreco } from '../Comida'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootReducer } from '../../store'
-import {
-  CartContainer,
-  CartItem,
-  Overlay,
-  SideBar,
-  Qtty,
-  Botao,
-  Conteudo,
-  Row,
-  InputGroup
-} from './styles'
 import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import ReactInputMask from 'react-input-mask'
+import { useFormik } from 'formik'
+import * as Yup from 'yup'
+
 import { usePurchaseMutation } from '../../services/api'
+import { close, remove, clear } from '../../store/reducers/Cart'
+import { RootReducer } from '../../store'
+import { formataPreco } from '../Comida'
+
+import * as S from './styles'
+import trash from '../../assets/images/lixeira.png'
 
 const Cart = () => {
   const { isOpen, itens } = useSelector((state: RootReducer) => state.cart)
@@ -128,15 +119,15 @@ const Cart = () => {
   }, [dispatch, isSuccess])
 
   return (
-    <CartContainer className={isOpen ? 'is-open' : ''}>
-      <Overlay
+    <S.CartContainer className={isOpen ? 'is-open' : ''}>
+      <S.Overlay
         onClick={() => {
           setIsPaying(false)
           setIsCheckouting(false)
           dispatch(close())
         }}
       />
-      <SideBar>
+      <S.SideBar>
         {!isSuccess && !data ? (
           <>
             {!isCheckouting ? (
@@ -145,7 +136,7 @@ const Cart = () => {
                   <>
                     <ul>
                       {itens.map((i) => (
-                        <CartItem key={i.id}>
+                        <S.CartItem key={i.id}>
                           <img src={i.foto} alt="" />
                           <div>
                             <h4>{i.nome}</h4>
@@ -156,16 +147,16 @@ const Cart = () => {
                               alt="Remover item do carrinho"
                             />
                           </div>
-                        </CartItem>
+                        </S.CartItem>
                       ))}
                     </ul>
-                    <Qtty>
+                    <S.Qtty>
                       <span>Valor total</span>
                       <span>{formataPreco(getTotalPrice())}</span>
-                    </Qtty>
-                    <Botao onClick={() => setIsCheckouting(true)}>
+                    </S.Qtty>
+                    <S.Botao onClick={() => setIsCheckouting(true)}>
                       Continuar com a entrega
-                    </Botao>
+                    </S.Botao>
                   </>
                 ) : (
                   <p className="center">
@@ -174,12 +165,12 @@ const Cart = () => {
                 )}
               </>
             ) : (
-              <Conteudo onSubmit={form.handleSubmit}>
+              <S.Conteudo onSubmit={form.handleSubmit}>
                 {!isPaying ? (
                   <>
                     <h3>Entrega</h3>
-                    <Row>
-                      <InputGroup>
+                    <S.Row>
+                      <S.InputGroup>
                         <label htmlFor="nome">Quem irá receber</label>
                         <input
                           name="nome"
@@ -190,10 +181,10 @@ const Cart = () => {
                           className={checkInputHasError('nome') ? 'error' : ''}
                           value={form.values.nome}
                         />
-                      </InputGroup>
-                    </Row>
-                    <Row>
-                      <InputGroup>
+                      </S.InputGroup>
+                    </S.Row>
+                    <S.Row>
+                      <S.InputGroup>
                         <label htmlFor="endereco">Endereço</label>
                         <input
                           name="endereco"
@@ -206,10 +197,10 @@ const Cart = () => {
                           }
                           value={form.values.endereco}
                         />
-                      </InputGroup>
-                    </Row>
-                    <Row>
-                      <InputGroup>
+                      </S.InputGroup>
+                    </S.Row>
+                    <S.Row>
+                      <S.InputGroup>
                         <label htmlFor="cidade">Cidade</label>
                         <input
                           name="cidade"
@@ -222,10 +213,10 @@ const Cart = () => {
                           }
                           value={form.values.cidade}
                         />
-                      </InputGroup>
-                    </Row>
-                    <Row>
-                      <InputGroup>
+                      </S.InputGroup>
+                    </S.Row>
+                    <S.Row>
+                      <S.InputGroup>
                         <label htmlFor="cep">CEP</label>
                         <ReactInputMask
                           onChange={form.handleChange}
@@ -237,8 +228,8 @@ const Cart = () => {
                           id="cep"
                           type="text"
                         />
-                      </InputGroup>
-                      <InputGroup>
+                      </S.InputGroup>
+                      <S.InputGroup>
                         <label htmlFor="numeroCasa">Número</label>
                         <ReactInputMask
                           onChange={form.handleChange}
@@ -252,10 +243,10 @@ const Cart = () => {
                           id="numeroCasa"
                           type="text"
                         />
-                      </InputGroup>
-                    </Row>
-                    <Row>
-                      <InputGroup>
+                      </S.InputGroup>
+                    </S.Row>
+                    <S.Row>
+                      <S.InputGroup>
                         <label htmlFor="complemento">
                           Complemento (opcional)
                         </label>
@@ -270,29 +261,29 @@ const Cart = () => {
                           id="complemento"
                           type="text"
                         />
-                      </InputGroup>
-                    </Row>
-                    <Botao
+                      </S.InputGroup>
+                    </S.Row>
+                    <S.Botao
                       className="margin-top"
                       type="button"
                       onClick={() => setIsPaying(true)}
                     >
                       Continuar com o pagamento
-                    </Botao>
-                    <Botao
+                    </S.Botao>
+                    <S.Botao
                       type="button"
                       onClick={() => setIsCheckouting(false)}
                     >
                       Voltar para o carrinho
-                    </Botao>
+                    </S.Botao>
                   </>
                 ) : (
                   <>
                     <h3>
                       Pagamento - Valor a pagar {formataPreco(getTotalPrice())}
                     </h3>
-                    <Row>
-                      <InputGroup>
+                    <S.Row>
+                      <S.InputGroup>
                         <label htmlFor="nomeCartao">Nome no cartão</label>
                         <input
                           name="nomeCartao"
@@ -305,10 +296,10 @@ const Cart = () => {
                           }
                           value={form.values.nomeCartao}
                         />
-                      </InputGroup>
-                    </Row>
-                    <Row>
-                      <InputGroup>
+                      </S.InputGroup>
+                    </S.Row>
+                    <S.Row>
+                      <S.InputGroup>
                         <label htmlFor="numeroCartao">Número do cartão</label>
                         <ReactInputMask
                           mask="9999 9999 9999 9999"
@@ -322,8 +313,8 @@ const Cart = () => {
                           id="numeroCartao"
                           type="text"
                         />
-                      </InputGroup>
-                      <InputGroup maxWidth="88px">
+                      </S.InputGroup>
+                      <S.InputGroup maxWidth="88px">
                         <label htmlFor="cvv">CVV</label>
                         <ReactInputMask
                           mask="999"
@@ -335,10 +326,10 @@ const Cart = () => {
                           id="cvv"
                           type="text"
                         />
-                      </InputGroup>
-                    </Row>
-                    <Row>
-                      <InputGroup>
+                      </S.InputGroup>
+                    </S.Row>
+                    <S.Row>
+                      <S.InputGroup>
                         <label htmlFor="mesVenc">Mês de vencimento</label>
                         <ReactInputMask
                           mask="99"
@@ -352,8 +343,8 @@ const Cart = () => {
                           id="mesVenc"
                           type="text"
                         />
-                      </InputGroup>
-                      <InputGroup>
+                      </S.InputGroup>
+                      <S.InputGroup>
                         <label htmlFor="anoVenc">Ano de vencimento</label>
                         <ReactInputMask
                           mask="9999"
@@ -367,9 +358,9 @@ const Cart = () => {
                           id="anoVenc"
                           type="text"
                         />
-                      </InputGroup>
-                    </Row>
-                    <Botao
+                      </S.InputGroup>
+                    </S.Row>
+                    <S.Botao
                       disabled={isLoading}
                       className="margin-top"
                       type="submit"
@@ -377,13 +368,13 @@ const Cart = () => {
                       {isLoading
                         ? 'Finalizando pagamento'
                         : 'Finalizar pagamento'}
-                    </Botao>
-                    <Botao type="button" onClick={() => setIsPaying(false)}>
+                    </S.Botao>
+                    <S.Botao type="button" onClick={() => setIsPaying(false)}>
                       Voltar para a edição de endereço
-                    </Botao>
+                    </S.Botao>
                   </>
                 )}
-              </Conteudo>
+              </S.Conteudo>
             )}
           </>
         ) : (
@@ -407,7 +398,7 @@ const Cart = () => {
               <br />
               Bom apetite!
             </p>
-            <Botao
+            <S.Botao
               className="margin-top"
               onClick={() => {
                 setIsPaying(false)
@@ -416,11 +407,11 @@ const Cart = () => {
               }}
             >
               Concluir
-            </Botao>
+            </S.Botao>
           </>
         )}
-      </SideBar>
-    </CartContainer>
+      </S.SideBar>
+    </S.CartContainer>
   )
 }
 

@@ -1,29 +1,12 @@
 import { useState } from 'react'
 import { add, open } from '../../store/reducers/Cart'
-import {
-  Botao,
-  Card,
-  Desricao,
-  Imagem,
-  Modal,
-  ModalContent,
-  Nome
-} from './styles'
+import * as S from './styles'
 
 import close from '../../assets/images/close.png'
 import { useDispatch } from 'react-redux'
-import { ComidaClass } from '../../Pages/Home'
 
 type Props = {
   comida: ComidaClass
-}
-
-type Modal = {
-  aberta: boolean
-  img: string
-  descricao: string
-  nome: string
-  porcao: string
 }
 
 export const formataPreco = (preco = 0) => {
@@ -50,17 +33,17 @@ const Comida = ({ comida }: Props) => {
 
   return (
     <>
-      <Card>
-        <Imagem src={comida.foto} alt="" />
-        <Nome>{comida.nome}</Nome>
-        <Desricao>{getDesricao(comida.descricao)}</Desricao>
-        <Botao onClick={() => setModalAberta(true)}>
+      <S.Card>
+        <S.Imagem src={comida.foto} alt="" />
+        <S.Nome>{comida.nome}</S.Nome>
+        <S.Desricao>{getDesricao(comida.descricao)}</S.Desricao>
+        <S.Botao onClick={() => setModalAberta(true)}>
           Adicionar ao carrinho
-        </Botao>
-      </Card>
+        </S.Botao>
+      </S.Card>
 
-      <Modal className={modalAberta ? 'visivel' : ''}>
-        <ModalContent>
+      <S.Modal className={modalAberta ? 'visivel' : ''}>
+        <S.ModalContent>
           <img src={comida.foto} alt="" />
           <div>
             <h4>{comida.nome}</h4>
@@ -69,9 +52,9 @@ const Comida = ({ comida }: Props) => {
               <br />
               Serve de {comida.porcao}
             </p>
-            <Botao onClick={addToCart}>
+            <S.Botao onClick={addToCart}>
               Adicionar ao carrinho - {formataPreco(comida.preco)}
-            </Botao>
+            </S.Botao>
           </div>
           <img
             className="close-icon"
@@ -81,14 +64,14 @@ const Comida = ({ comida }: Props) => {
             }}
             alt=""
           />
-        </ModalContent>
+        </S.ModalContent>
         <div
           onClick={() => {
             setModalAberta(false)
           }}
           className="overlay"
         ></div>
-      </Modal>
+      </S.Modal>
     </>
   )
 }

@@ -1,6 +1,5 @@
 import Comida from '../Comida'
 import { Container, Listagem } from './styles'
-import { ComidaClass } from '../../Pages/Home'
 
 type Props = {
   cardapio: ComidaClass[]
